@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'pgsql:host=localhost;dbname=finuchet',
-    'username' => 'finuchet',
-    'password' => 'Qwerty123',
+    'dsn' => 'pgsql:host=localhost;dbname=',
+    'username' => '',
+    'password' => '',
     'charset' => 'utf8',
     'schemaMap' => [
 	'pgsql' => [ 'class'=>'yii\db\pgsql\Schema', 'defaultSchema' => 'public' ]
