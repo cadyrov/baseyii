@@ -128,7 +128,7 @@ $config = [
 	   ],
 	   'gii' => [
 			'class' => 'yii\gii\Module',
-			'allowedIPs' => ['178.161.223.2'],
+			'allowedIPs' => ['127.0.0.1'],
             'generators' => [
                 'crud' => [
                     'class' => 'cadyrov\gii\crud\Generator',
@@ -148,32 +148,5 @@ $config = [
     'params' => $params,
 ];
 
-if (YII_ENV_TEST) {
-    // configuration adjustments for 'dev' environment
-    $config['bootstrap'][] = 'debug';
-    $config['modules']['debug'] = [
-        'class' => 'yii\debug\Module',
-    ];
-
-    $config['bootstrap'][] = 'gii';
-    $config['modules']['gii'] = [
-        'class' => 'yii\gii\Module',
-	'allowedIPs' => ['127.0.0.1', '::1'],    
-        'generators' => [
-            'crud' => [
-                'class' => 'cadyrov\gii\crud\Generator',
-                    'templates' => [
-                    'crud' => 'cadyrov/gii/crud/default',
-                ]
-            ],
-            'model' => [
-                'class' => 'cadyrov\gii\model\Generator',
-                'templates' => [
-                    'model' => 'cadyrov/gii/model/default',
-                ]
-            ]
-        ],
-    ];
-}
 
 return $config;
