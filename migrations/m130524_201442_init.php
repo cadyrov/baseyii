@@ -131,7 +131,7 @@ class m130524_201442_init extends Migration
         ]);
         $this->batchInsert('{{%auth_item_child}}', ['parent', 'child'], [
             ['administrator', 'rbacManage'],
-            ['userUpdateNoElderRank', 'userUpdate'],
+            ['userUpdateNoElderRank'],
         ]);
         $this->batchInsert('{{%auth_assignment}}', ['item_name', 'user_id', 'created_at', 'updated_at'], [
             ['administrator', 1, time(), time()],
