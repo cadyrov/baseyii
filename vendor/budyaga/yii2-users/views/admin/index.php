@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= (Yii::$app->user->can('userCreate')) ? Html::a(Yii::t('users', 'CREATE'), ['create'], ['class' => 'btn btn-success']) : ''?>
+        <?= (Yii::$app->user->can('rbacManage')) ? Html::a(Yii::t('users', 'CREATE'), ['create'], ['class' => 'btn btn-success']) : ''?>
     </p>
 
     <?= GridView::widget([
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{view} {update} {delete} {permissions}',
                 'buttons' => [
                     'view' => function ($url, $model, $key) {
-                        if (!Yii::$app->user->can('userView', ['user' => $model])) {
+                        if (!Yii::$app->user->can('rbacManage', ['user' => $model])) {
                             return '';
                         }
                         $options = [
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, $options);
                     },
                     'update' => function ($url, $model, $key) {
-                        if (!Yii::$app->user->can('userUpdate', ['user' => $model])) {
+                        if (!Yii::$app->user->can('rbacManage', ['user' => $model])) {
                             return '';
                         }
                         $options = [
@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, $options);
                     },
                     'permissions' => function ($url, $model, $key) {
-                        if (!Yii::$app->user->can('userPermissions', ['user' => $model])) {
+                        if (!Yii::$app->user->can('rbacManage', ['user' => $model])) {
                             return '';
                         }
                         $options = [
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::a('<span class="glyphicon glyphicon-cog"></span>', $url, $options);
                     },
                     'delete' => function($url, $model, $key) {
-                        if (!Yii::$app->user->can('userDelete', ['user' => $model])) {
+                        if (!Yii::$app->user->can('rbacManage', ['user' => $model])) {
                             return '';
                         }
                         $options = [

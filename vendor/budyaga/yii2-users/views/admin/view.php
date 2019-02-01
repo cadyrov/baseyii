@@ -21,8 +21,8 @@ $assets = UsersAsset::register($this);
     <h1><?= Html::encode($this->title)  ?></h1>
 
     <p>
-        <?= Yii::$app->user->can('userUpdate', ['user' => $model]) ? Html::a(Yii::t('yii', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) : '' ?>
-        <?= Yii::$app->user->can('userDelete') ? Html::a(Yii::t('yii', 'Delete'), ['delete', 'id' => $model->id], ['class' => 'btn btn-danger', 'data' => ['confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'), 'method' => 'post']]) : ''?>
+        <?= Yii::$app->user->can('rbacManage', ['user' => $model]) ? Html::a(Yii::t('yii', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) : '' ?>
+        <?= Yii::$app->user->can('rbacManage') ? Html::a(Yii::t('yii', 'Delete'), ['delete', 'id' => $model->id], ['class' => 'btn btn-danger', 'data' => ['confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'), 'method' => 'post']]) : ''?>
     </p>
 
     <?= DetailView::widget([
@@ -51,7 +51,7 @@ $assets = UsersAsset::register($this);
 
     <h2><?= Yii::t('users', 'USER_PERMISSIONS')?></h2>
     <p>
-        <?= Yii::$app->user->can('userPermissions', ['user' => $model]) ? Html::a(Yii::t('yii', 'Update'), ['permissions', 'id' => $model->id], ['class' => 'btn btn-primary']) : '' ?>
+        <?= Yii::$app->user->can('rbacManage', ['user' => $model]) ? Html::a(Yii::t('yii', 'Update'), ['permissions', 'id' => $model->id], ['class' => 'btn btn-primary']) : '' ?>
     </p>
 
     <?= PermissionsTreeWidget::widget(['user' => $model])?>

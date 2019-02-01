@@ -117,15 +117,6 @@ class m130524_201442_init extends Migration
                 time(),
                 time()
             ],
-            [
-                \Yii::t('users', 'MIGRATION_MODERATOR'),
-                \Yii::$app->security->generateRandomString(),
-                \Yii::$app->security->generatePasswordHash('moderator@example.com'),
-                'moderator@example.com',
-                User::STATUS_ACTIVE,
-                time(),
-                time()
-            ]
         ]);
         $this->insert('{{%auth_rule}}', [
             'name' => 'noElderRank',
@@ -135,31 +126,15 @@ class m130524_201442_init extends Migration
         ]);
         $this->batchInsert('{{%auth_item}}', ['name', 'type', 'description', 'rule_name', 'created_at', 'updated_at'], [
             ['administrator', Item::TYPE_ROLE, \Yii::t('users', 'MIGRATION_ADMINISTRATOR'), NULL, time(), time()],
-            ['moderator', Item::TYPE_ROLE, \Yii::t('users', 'MIGRATION_MODERATOR'), NULL, time(), time()],
             ['rbacManage', Item::TYPE_PERMISSION, \Yii::t('users', 'MIGRATION_RBAC_MANAGE'), NULL, time(), time()],
-            ['userCreate', Item::TYPE_PERMISSION, \Yii::t('users', 'MIGRATION_USER_CREATE'), NULL, time(), time()],
-            ['userDelete', Item::TYPE_PERMISSION, \Yii::t('users', 'MIGRATION_USER_DELETE'), NULL, time(), time()],
-            ['userManage', Item::TYPE_PERMISSION, \Yii::t('users', 'MIGRATION_USER_MANAGE'), NULL, time(), time()],
-            ['userPermissions', Item::TYPE_PERMISSION, \Yii::t('users', 'MIGRATION_USER_PERMISSIONS'), NULL, time(), time()],
-            ['userUpdate', Item::TYPE_PERMISSION, \Yii::t('users', 'MIGRATION_USER_UPDATE'), NULL, time(), time()],
             ['userUpdateNoElderRank', Item::TYPE_PERMISSION, \Yii::t('users', 'MIGRATION_USER_UPDATE_NO_ELDER_RANK'), 'noElderRank', time(), time()],
-            ['userView', Item::TYPE_PERMISSION, \Yii::t('users', 'MIGRATION_USER_VIEW'), NULL, time(), time()],
         ]);
         $this->batchInsert('{{%auth_item_child}}', ['parent', 'child'], [
             ['administrator', 'rbacManage'],
-            ['administrator', 'userCreate'],
-            ['administrator', 'userDelete'],
-            ['administrator', 'userPermissions'],
-            ['administrator', 'userUpdate'],
-            ['administrator', 'moderator'],
-            ['moderator', 'userManage'],
-            ['moderator', 'userView'],
-            ['moderator', 'userUpdateNoElderRank'],
             ['userUpdateNoElderRank', 'userUpdate'],
         ]);
         $this->batchInsert('{{%auth_assignment}}', ['item_name', 'user_id', 'created_at', 'updated_at'], [
             ['administrator', 1, time(), time()],
-            ['moderator', 2, time(), time()],
         ]);
     }
 

@@ -33,35 +33,8 @@ class AdminController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index'],
-                        'roles' => ['userManage'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['create'],
-                        'roles' => ['userCreate'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['view'],
-                        'roles' => ['userView'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['update'],
-                        'matchCallback' => function ($rule, $action) {
-                            return Yii::$app->user->can('userUpdate', ['user' => $this->findModel(Yii::$app->request->get('id'))]);
-                        }
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['delete'],
-                        'roles' => ['userDelete'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['permissions'],
-                        'roles' => ['userPermissions'],
+                        'actions' => ['index', 'create', 'view', 'update', 'delete', 'permissions'],
+                        'roles' => ['rbacManage'],
                     ],
                 ],
             ],

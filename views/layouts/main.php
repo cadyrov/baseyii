@@ -26,6 +26,38 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
+<?php
+    $login = "";
+	$changePass = '<li>' . Html::a('Сменить пароль',['settings/changepass']) . '</li>';
+	$users = "";
+	if (Yii::$app->user->can('rbacManage')) {
+		$users = '<li>' . Html::a('Пользователи',['/user/admin']) . '</li>';
+	}
+	$rights = "";
+	if (Yii::$app->user->can('rbacManage')) {
+		$rights = '<li>' . Html::a('Права', ['/user/rbac']) . '</li>';
+	}
+	if (Yii::$app->user->isGuest) {
+		$login = '<li>' . Html::a('Вход', ['/login']) . '</li>';
+	} else {
+		$login = '<li class="dropdown" id="settingsdrop">
+			<a href="#" class="dropdown-toggle keep_open"  data-toggle="dropdown" >' . Yii::$app->user->identity->username . '</a>
+					<ul class="dropdown-menu keep_open" id="settings">
+					<li>' . Html::a('Выход',['/logout']) . '</li>
+					' . $changePass . '
+					<li class="divider"></li>
+					' . $users . '
+					' . $rights . '
+					<li class="divider"></li>
+					<li class="disabled"><a href="#" >Справочники</a></li>
+					</ul>
+				</li>';
+
+	}
+
+
+?>
+
 <div class="wrap">
     <?php
     NavBar::begin([
@@ -38,42 +70,19 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
+            $login
         ],
     ]);
     NavBar::end();
     ?>
 
     <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
 
 <?php $this->endBody() ?>
 </body>
