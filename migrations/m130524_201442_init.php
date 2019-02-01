@@ -127,11 +127,9 @@ class m130524_201442_init extends Migration
         $this->batchInsert('{{%auth_item}}', ['name', 'type', 'description', 'rule_name', 'created_at', 'updated_at'], [
             ['administrator', Item::TYPE_ROLE, \Yii::t('users', 'MIGRATION_ADMINISTRATOR'), NULL, time(), time()],
             ['rbacManage', Item::TYPE_PERMISSION, \Yii::t('users', 'MIGRATION_RBAC_MANAGE'), NULL, time(), time()],
-            ['userUpdateNoElderRank', Item::TYPE_PERMISSION, \Yii::t('users', 'MIGRATION_USER_UPDATE_NO_ELDER_RANK'), 'noElderRank', time(), time()],
         ]);
         $this->batchInsert('{{%auth_item_child}}', ['parent', 'child'], [
             ['administrator', 'rbacManage'],
-            ['userUpdateNoElderRank'],
         ]);
         $this->batchInsert('{{%auth_assignment}}', ['item_name', 'user_id', 'created_at', 'updated_at'], [
             ['administrator', 1, time(), time()],
