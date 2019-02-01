@@ -28,7 +28,7 @@ AppAsset::register($this);
 
 <?php
     $login = "";
-	$changePass = '<li>' . Html::a('Сменить пароль',['settings/changepass']) . '</li>';
+	$changePass = '<li>' . Html::a('Сменить пароль',['/settings/changepass']) . '</li>';
 	$users = "";
 	if (Yii::$app->user->can('rbacManage')) {
 		$users = '<li>' . Html::a('Пользователи',['/user/admin']) . '</li>';
